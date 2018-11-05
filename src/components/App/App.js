@@ -3,6 +3,7 @@ import './App.css';
 import {listStudents} from '../../repository/studentRepository';
 import StudentsList from '../StudentsList/studentsList';
 import EditStudentDetails from "../EditStudentDetails/EditStudentDetails";
+import CreateStudent from "../CreateStudent/CreateStudent";
 
 class App extends Component {
   constructor(props){
@@ -14,6 +15,7 @@ class App extends Component {
     };
     this.onClick = this.onClick.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.onNewStudentSubmit = this.onNewStudentSubmit.bind(this);
   }
 
   onClick(index){
@@ -44,12 +46,20 @@ class App extends Component {
     });
   }
 
+  onNewStudentSubmit(student){
+      let list = this.state.students;
+      this.setState({
+          students: [...list, student]
+      });
+  }
+
 
   render() {
     return (
       <div className="App">
         <StudentsList students={this.state.students} onClick={this.onClick}/>
         <EditStudentDetails visible={this.state.visible} onSubmit={this.onSubmit}/>
+          <CreateStudent onSubmit={this.onNewStudentSubmit}/>
       </div>
     );
   }

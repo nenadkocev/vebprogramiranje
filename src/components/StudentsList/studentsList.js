@@ -1,5 +1,31 @@
 import React  from 'react';
 import StudentItem from '../StudentItem/StudentItem';
+import ReactPaginate from 'react-paginate';
+
+
+class StdeuntsList extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            pageNum: 0,
+            pageSize: 3
+        };
+    }
+
+
+    const getStudentsPage = (offset, nextPageOffset) => {
+        
+    }
+
+    render(){
+        const offset = this.state.pageNum * this.state.pageSize;
+        const nextPageOffset = offset + this.state.pageSize;
+        const pageCount = Math.ceil(this.props.students.length / this.state.pageSize);
+        const tasks = this.getStudentsPage(offset, nextPageOffset);
+
+
+    }
+}
 
 
 const studentsList = (props) => {
