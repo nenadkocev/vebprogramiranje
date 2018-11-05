@@ -11,7 +11,8 @@ class App extends Component {
     this.state = {
       students :listStudents(),
         visible: false,
-        index: 0
+        index: 0,
+        student: listStudents()[0]
     };
     this.onClick = this.onClick.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -26,9 +27,13 @@ class App extends Component {
       });
     }
     else {
+        let student1 = this.state.students
+            .filter(s => s.index === index);
+        console.log(student1[0]);
       this.setState({
           visible: true,
-          index: index
+          index: index,
+          student: student1[0]
       });
     }
   }
@@ -53,12 +58,11 @@ class App extends Component {
       });
   }
 
-
   render() {
     return (
       <div className="App">
         <StudentsList students={this.state.students} onClick={this.onClick}/>
-        <EditStudentDetails visible={this.state.visible} onSubmit={this.onSubmit}/>
+        <EditStudentDetails student={this.state.student} visible={this.state.visible} onSubmit={this.onSubmit}/>
           <CreateStudent onSubmit={this.onNewStudentSubmit}/>
       </div>
     );

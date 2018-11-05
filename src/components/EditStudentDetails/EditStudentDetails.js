@@ -4,10 +4,10 @@ class EditStudentDetails extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            name: "",
-            surname: "",
-            index : "",
-            class : ""
+            name: this.props.student.name,
+            surname: this.props.student.surname,
+            index : this.props.student.index,
+            class : this.props.student.class
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleNameChange = this.handleNameChange.bind(this);
@@ -18,25 +18,14 @@ class EditStudentDetails extends React.Component{
 
     handleSubmit(e){
         const student = {
-            name: this.state.name,
-            surname: this.state.surname,
-            index: this.state.index,
-            class: this.state.class
+            name: "",
+            surname: "",
+            index: "",
+            class: ""
         };
         this.props.onSubmit(student);
         e.preventDefault();
     }
-
-    // let handleSubmit = (e) => {
-    //     const student = {
-    //         name: this.state.name,
-    //         surname: this.state.surname,
-    //         index: this.state.index,
-    //         class: this.state.class
-    //     };
-    //     this.props.onSubmit(student);
-    //     e.preventDefault();
-    // }
 
     handleNameChange(e){
         const newName = e.target.value;
@@ -72,13 +61,13 @@ class EditStudentDetails extends React.Component{
             <div style={type}>
                 <form className="form-group" onSubmit={this.handleSubmit}>
                     Име
-                    <input className="Name" type="text" onChange={this.handleNameChange}/>
+                    <input className="Name" type="text" onChange={this.handleNameChange} value={this.props.student.name}/>
                     Презиме
-                    <input className="Surname" type="text" onChange={this.handleSurnameChange}/>
+                    <input className="Surname" type="text" onChange={this.handleSurnameChange} value={this.props.student.surname}/>
                     Индекс
-                    <input className="Index" type="text" onChange={this.handleIndexChange}/>
+                    <input className="Index" type="text" onChange={this.handleIndexChange}value={this.props.student.index}/>
                     Насока
-                    <input className="Class" type="text" onChange={this.handleClassChange}/>
+                    <input className="Class" type="text" onChange={this.handleClassChange}value={this.props.student.class}/>
                     <input className="submit btn" type="submit" value="Промени"/>
                 </form>
             </div>
