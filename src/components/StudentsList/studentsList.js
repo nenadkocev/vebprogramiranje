@@ -12,17 +12,39 @@ class StdeuntsList extends React.Component{
         };
     }
 
-
-    const getStudentsPage = (offset, nextPageOffset) => {
-        
-    }
-
     render(){
+
+        // getTasksPage = (offset, nextPageOffset) => {
+        //     return this.props.tasks
+        //         .map((task, index) => {
+        //             return <Task task={task}
+        //                          key={index}
+        //                          startWork={this.props.startStop}
+        //                          index={index}/>
+        //         })
+        //         // the filter is after the map function, so that the index attribute in map function is not reset for each page
+        //         .filter((task, index) => {
+        //             return index >= offset
+        //                 && index < nextPageOffset;
+        //         });
+        // };
+
+
+        const getStudentsPage = (offset, nextPageOffset) => {
+            return this.props.students
+                .map((student, index) => {
+                    return <StudentItem key={student.index} student={student} onClick={this.props.onClick}/>
+                })
+                .filter((task, index) => {
+                    return index >= offset && index < nextPageOffset;
+                });
+        };
+
         const offset = this.state.pageNum * this.state.pageSize;
         const nextPageOffset = offset + this.state.pageSize;
         const pageCount = Math.ceil(this.props.students.length / this.state.pageSize);
-        const tasks = this.getStudentsPage(offset, nextPageOffset);
-
+        const tasks = getStudentsPage(offset, nextPageOffset);
+        
 
     }
 }
