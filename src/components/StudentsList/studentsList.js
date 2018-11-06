@@ -13,23 +13,6 @@ class StudentsList extends React.Component{
     }
 
     render(){
-
-        // getTasksPage = (offset, nextPageOffset) => {
-        //     return this.props.tasks
-        //         .map((task, index) => {
-        //             return <Task task={task}
-        //                          key={index}
-        //                          startWork={this.props.startStop}
-        //                          index={index}/>
-        //         })
-        //         // the filter is after the map function, so that the index attribute in map function is not reset for each page
-        //         .filter((task, index) => {
-        //             return index >= offset
-        //                 && index < nextPageOffset;
-        //         });
-        // };
-
-
         const getStudentsPage = (offset, nextPageOffset) => {
             return this.props.students
                 .map((student, index) => {

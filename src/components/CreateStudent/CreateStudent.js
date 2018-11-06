@@ -33,7 +33,7 @@ class CreateStudent extends React.Component{
 
         const handleClassChange = (e) => {
             this.setState({
-                index: e.target.value
+                class: e.target.value
             })
         };
 
@@ -45,6 +45,12 @@ class CreateStudent extends React.Component{
                 class: this.state.class,
 
             };
+            this.setState({
+               name: "",
+               surname: "",
+               index: "",
+               class: ""
+            });
             this.props.onSubmit(student);
             e.preventDefault();
         };
@@ -52,13 +58,13 @@ class CreateStudent extends React.Component{
         return(
             <form onSubmit={handleFormSubmit}>
                 Име
-                <input type="text" onChange={handleNameChange}/>
+                <input type="text" onChange={handleNameChange} value={this.state.name}/>
                 Презиме
-                <input type="text" onChange={handleSurnameChange}/>
+                <input type="text" onChange={handleSurnameChange} value={this.state.surname}/>
                 Индекс
-                <input type="text" onChange={handleIndexChange}/>
+                <input type="text" onChange={handleIndexChange} value={this.state.index}/>
                 Насока
-                <input type="text" onChange={handleClassChange}/>
+                <input type="text" onChange={handleClassChange} value={this.state.class}/>
                 <input type="submit" className="btn" value="Внеси нов студент"/>
             </form>
         );

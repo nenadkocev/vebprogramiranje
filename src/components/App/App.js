@@ -20,22 +20,13 @@ class App extends Component {
   }
 
   onClick(index){
-    if(this.state.visible){
-      this.setState({
-          visible: false,
-          index: 0
-      });
-    }
-    else {
-        let student1 = this.state.students
-            .filter(s => s.index === index);
-        console.log(student1[0]);
+      let student1 = this.state.students
+          .filter(s => s.index === index);
       this.setState({
           visible: true,
           index: index,
           student: student1[0]
       });
-    }
   }
 
   onSubmit(student){
@@ -59,6 +50,8 @@ class App extends Component {
   }
 
   render() {
+      console.log(this.state.students);
+      console.log("renderApp");
     return (
       <div className="App">
         <StudentsList students={this.state.students} onClick={this.onClick}/>
