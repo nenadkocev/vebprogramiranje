@@ -12,10 +12,7 @@
                 visible: this.props.visible
             };
             this.handleSubmit = this.handleSubmit.bind(this);
-            this.handleNameChange = this.handleNameChange.bind(this);
-            this.handleSurnameChange = this.handleSurnameChange.bind(this);
-            this.handleClassChange = this.handleClassChange.bind(this);
-            this.handleIndexChange = this.handleIndexChange.bind(this);
+            this.handleInputChange = this.handleInputChange.bind(this);
         }
 
         componentWillReceiveProps(nextProps){
@@ -30,6 +27,13 @@
 
 
         handleSubmit(e){
+            if(!this.state.name.length ||
+                !this.state.surname.length ||
+                !this.state.class.length ||
+                !this.state.index.length){
+                e.preventDefault();
+                return;
+            }
             const student = {
                 name: this.state.name,
                 surname: this.state.surname,
@@ -40,31 +44,9 @@
             e.preventDefault();
         }
 
-        handleNameChange(e){
-            const newName = e.target.value;
+        handleInputChange(e){
             this.setState({
-               name: newName
-            });
-        }
-
-        handleSurnameChange(e){
-            const newName = e.target.value;
-            this.setState({
-                surname: newName
-            });
-        }
-
-        handleIndexChange(e){
-            const newIndex = e.target.value;
-            this.setState({
-                index: newIndex
-            });
-        }
-
-        handleClassChange(e){
-            const newClass = e.target.value;
-            this.setState({
-                class: newClass
+               [e.target.name] : e.target.value
             });
         }
 
@@ -74,13 +56,13 @@
                 <div style={type}>
                     <form className="form-group" onSubmit={this.handleSubmit}>
                         Име
-                        <input className="Name" type="text" onChange={this.handleNameChange} value={this.state.name}/>
+                        <input name="name" type="text" onChange={this.handleInputChange} value={this.state.name}/>
                         Презиме
-                        <input className="Surname" type="text" onChange={this.handleSurnameChange} value={this.state.surname}/>
+                        <input name="surname" type="text" onChange={this.handleInputChange} value={this.state.surname}/>
                         Индекс
-                        <input className="Index" type="text" onChange={this.handleIndexChange} value={this.state.index}/>
+                        <input name="index" type="text" onChange={this.handleInputChange} value={this.state.index}/>
                         Насока
-                        <input className="Class" type="text" onChange={this.handleClassChange} value={this.state.class}/>
+                        <input name="class" type="text" onChange={this.handleInputChange} value={this.state.class}/>
                         <input className="submit btn" type="submit" value="Промени"/>
                     </form>
                 </div>
