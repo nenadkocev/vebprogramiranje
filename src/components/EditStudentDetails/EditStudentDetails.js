@@ -2,13 +2,12 @@
 
     class EditStudentDetails extends React.Component{
         constructor(props){
-            console.log("edit constructor called");
             super(props);
             this.state = {
                 name: this.props.student.name,
-                surname: this.props.student.surname,
+                lastName: this.props.student.lastName,
                 index : this.props.student.index,
-                class : this.props.student.class,
+                studyProgram : this.props.student.studyProgram,
                 visible: this.props.visible
             };
             this.handleSubmit = this.handleSubmit.bind(this);
@@ -18,9 +17,9 @@
         componentWillReceiveProps(nextProps){
             this.setState({
                 name: nextProps.student.name,
-                surname: nextProps.student.surname,
+                lastName: nextProps.student.lastName,
                 index : nextProps.student.index,
-                class : nextProps.student.class,
+                studyProgram : nextProps.student.studyProgram,
                 visible: nextProps.visible
             });
         }
@@ -28,25 +27,27 @@
 
         handleSubmit(e){
             if(!this.state.name.length ||
-                !this.state.surname.length ||
-                !this.state.class.length ||
+                !this.state.lastName.length ||
+                !this.state.studyProgram.length ||
                 !this.state.index.length){
                 e.preventDefault();
                 return;
             }
             const student = {
                 name: this.state.name,
-                surname: this.state.surname,
+                lastName: this.state.lastName,
                 index : this.state.index,
-                class : this.state.class
+                studyProgram : this.state.studyProgram
             };
             this.props.onSubmit(student);
             e.preventDefault();
         }
 
         handleInputChange(e){
+            const value = e.target.value;
+            const name = [e.target.name];
             this.setState({
-               [e.target.name] : e.target.value
+               [name] : value
             });
         }
 
@@ -58,11 +59,11 @@
                         Име
                         <input name="name" type="text" onChange={this.handleInputChange} value={this.state.name}/>
                         Презиме
-                        <input name="surname" type="text" onChange={this.handleInputChange} value={this.state.surname}/>
+                        <input name="lastName" type="text" onChange={this.handleInputChange} value={this.state.lastName}/>
                         Индекс
                         <input name="index" type="text" onChange={this.handleInputChange} value={this.state.index}/>
                         Насока
-                        <input name="class" type="text" onChange={this.handleInputChange} value={this.state.class}/>
+                        <input name="studyProgram" type="text" onChange={this.handleInputChange} value={this.state.studyProgram}/>
                         <input className="submit btn" type="submit" value="Промени"/>
                     </form>
                 </div>

@@ -5,12 +5,11 @@ class CreateStudent extends React.Component{
         super(props);
         this.state = {
             name: "",
-            surname: "",
+            lastName: "",
             index: "",
-            class: ""
+            studyProgram: "",
         };
     }
-
 
     render(){
         const handleNameChange = (e) => {
@@ -21,7 +20,7 @@ class CreateStudent extends React.Component{
 
         const handleSurnameChange = (e) => {
             this.setState({
-                surname: e.target.value
+                lastName: e.target.value
             })
         };
 
@@ -32,39 +31,53 @@ class CreateStudent extends React.Component{
         };
 
         const handleClassChange = (e) => {
+            console.log(e.target.value);
             this.setState({
-                class: e.target.value
+                studyProgram: e.target.value
             })
         };
+
 
         const handleFormSubmit = (e) => {
             const student = {
               name: this.state.name,
-                surname: this.state.surname,
+                lastName: this.state.lastName,
                 index: this.state.index,
-                class: this.state.class,
-
+                studyProgram: this.state.studyProgram,
             };
             this.setState({
                name: "",
-               surname: "",
+                lastName: "",
                index: "",
-               class: ""
+                studyProgram: ""
             });
             this.props.onSubmit(student);
-            e.preventDefault();
         };
+
+        let nasoki = this.props.nasoki.map(n => {
+            return (
+                <div key={n.id}>
+                    <input type="radio" value={n.name} name="nasoka"/>
+                    {n.name}
+                </div>
+            );
+        });
+
 
         return(
             <form onSubmit={handleFormSubmit}>
                 Име
                 <input type="text" onChange={handleNameChange} value={this.state.name}/>
                 Презиме
-                <input type="text" onChange={handleSurnameChange} value={this.state.surname}/>
+                <input type="text" onChange={handleSurnameChange} value={this.state.lastName}/>
                 Индекс
                 <input type="text" onChange={handleIndexChange} value={this.state.index}/>
-                Насока
-                <input type="text" onChange={handleClassChange} value={this.state.class}/>
+                {/*Насока*/}
+                {/*<input type="text" onChange={handleClassChange} value={this.state.studyProgram}/>*/}
+
+                <fieldset onChange={handleClassChange}>
+                    {nasoki}
+                </fieldset>
                 <input type="submit" className="btn" value="Внеси нов студент"/>
             </form>
         );

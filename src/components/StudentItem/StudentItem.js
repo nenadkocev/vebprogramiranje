@@ -17,7 +17,7 @@ class StudentItem extends React.Component{
                     {this.props.student.name}
                 </span>
                 <span>
-                    {this.props.student.surname}
+                    {this.props.student.lastName}
                 </span>
             </div>
         );
