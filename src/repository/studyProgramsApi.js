@@ -16,3 +16,12 @@ export const addNewStudyProgramApi = (studyProgram) => {
     })
         .catch(error => console.error('Error:', error));
 };
+
+export const deleteStudyProgramApi = (id, isDeleteOk) => {
+
+    return  fetch('http://localhost:8080/study_programs/delete/' + id, {
+        method: "DELETE" // *GET, POST, PUT, DELETE, etc.
+        //mode: "cors", // no-cors, cors, *same-origin
+    })
+        .then(response => isDeleteOk(response)); // parses response to JSON
+};

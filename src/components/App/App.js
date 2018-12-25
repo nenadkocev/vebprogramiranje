@@ -71,6 +71,8 @@ class App extends Component {
     //    students : list,
     //    visible: false
     // });
+      debugger;
+      console.log(student);
       putStudent(student);
   }
 

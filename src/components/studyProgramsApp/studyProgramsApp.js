@@ -1,29 +1,49 @@
 import React, { Component } from 'react';
-import {addNewStudyProgramApi, getStudyProgramsFromApi} from "../../repository/studyProgramsApi";
+import {addNewStudyProgramApi, deleteStudyProgramApi, getStudyProgramsFromApi} from "../../repository/studyProgramsApi";
 import StudyProgramsList from "../StudyProgramList/StudyProgramList"
 import CreateStudyProgram from "../CreateStudyProgram/CreateStudyProgram";
 
 class studyProgramsApp extends Component {
-
     constructor(props){
         super(props);
         this.state = {
-            programs: []
+            programs: [],
+            status : 200
         };
     }
+
+    isDeleteOk = (response) => {
+        console.log(response);
+        this.setState({
+            status: response.status
+        })
+    };
 
     onNewStudyProgram = (studyProgram) => {
         addNewStudyProgramApi(studyProgram);
     };
 
+    deleteStudyProgram = (id) => {
+      deleteStudyProgramApi(id, this.isDeleteOk);
+        let newList = this.state.programs.filter(p => p.id !== id);
+        this.setState({
+            programs : newList
+        })
+    };
+
     render(){
-        return(
-            <div style={{margin: '10px'}}>
-                <h1>Study Programs</h1>
-                <StudyProgramsList programs = {this.state.programs}/>
-                <CreateStudyProgram onSubmit={this.onNewStudyProgram}/>
-            </div>
-        );
+        if(this.state.status !== 200){
+            return <h1>ERROR {this.state.status}</h1>
+        }
+        else{
+            return(
+                <div style={{margin: '10px'}}>
+                    <h1>Study Programs</h1>
+                    <StudyProgramsList deleteProgram={this.deleteStudyProgram} programs = {this.state.programs}/>
+                    <CreateStudyProgram onSubmit={this.onNewStudyProgram}/>
+                </div>
+            );
+        }
     }
 
     componentDidMount(){

@@ -10,10 +10,18 @@ class StudyProgram extends Component{
         this.props.onClick(this.props.id);
     };
 
+    deleteStudyProgram = (e) => {
+        this.props.deleteProgram(e.target.value);
+    };
+
     render(){
         let className = "studyProgram" + this.props.id;
         return (
-            <label onClick={this.handleOnClick} className={className}>{this.props.name}</label>
+            <span>
+                <label className={className}>{this.props.name}</label>
+                <button style={{marginLeft: "10px"}} className="btn" onClick={this.deleteStudyProgram} value={this.props.id}>Избриши</button>
+
+            </span>
         );
     }
 }

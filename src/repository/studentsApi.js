@@ -19,11 +19,13 @@ export const postStudent = (student) => {
 };
 
 export const putStudent  = (student) => {
-    return fetch('http://localhost:8080/students', {
-        method: "PATCH", // *GET, POST, PUT, DELETE, etc.
+    console.log(student);
+    return fetch('http://localhost:8080/students/update', {
+        method: "POST", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors, cors, *same-origin
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify(student)
+        body: JSON.stringify(student), // body data type must match "Content-Type" header
     })
 };
